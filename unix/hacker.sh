@@ -27,7 +27,7 @@ ping -c 3 $1
 sleep 2
 netstat
 sleep 1
-findsmb
+stty
 sleep 1
 for i in {1..10000}
 do
