@@ -15,7 +15,7 @@ fi
    git status
      read -p "Do you want to push: " yn
        case $yn in
-         [Yy]* ) git add -A;git commit -m $a;git pull origin $b;git push origin $b; break;;
+         [Yy]* ) git add -A;git commit -m "${a}";git pull origin $b;git push origin $b; break;;
            [Nn]* ) exit;;
              * ) echo "Please answer yes or no:: ";;
                esac
