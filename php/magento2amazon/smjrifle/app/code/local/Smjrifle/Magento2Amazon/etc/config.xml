@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Smjrifle_Magento2Amazon>
+            <version>0.1.0</version>
+        </Smjrifle_Magento2Amazon>
+    </modules>
+        
+        
+<global>
+        <helpers>
+            <Magento2Amazon>
+                <class>Smjrifle_Magento2Amazon_Helper</class>
+            </Magento2Amazon>  
+        </helpers>
+</global>        
+    
+    
+        <admin>
+        <routers>
+            <magento2amazon>
+                <use>admin</use>
+                <args>
+                    <module>Smjrifle_Magento2Amazon</module>
+                    <frontName>magento2amazon</frontName>
+                </args>
+            </magento2amazon>
+        </routers>
+         <routers>
+            <magento2amazon_index_remove>
+                <use>admin</use>
+                <args>
+                    <module>Smjrifle_Magento2Amazon</module>
+                    <frontName>remove</frontName>
+                </args>
+            </magento2amazon_index_remove>
+        </routers>
+    </admin>
+    
+ 
+    
+    
+    <adminhtml>
+        <menu>
+            <menu1 translate="title" module="Magento2Amazon">
+                <title>Magento2Amazon</title>
+                <sort_order>60</sort_order>
+                <children>
+                    <menuitem1 module="Magento2Amazon">
+                        <title>Settings</title>
+                        <action>magento2amazon/settings</action>
+                    </menuitem1>
+                </children>                
+            </menu1>
+        </menu>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <menu1 translate="title" module="Magento2Amazon">
+							<title>Magento2Admin</title>
+                			<sort_order>60</sort_order>
+                            <children>
+                                <menuitem1>
+                                    <title>Settings</title>
+                                </menuitem1>
+                            </children>
+                       </menu1>
+                   </children>
+               </admin>
+           </resources>
+        </acl>
+    </adminhtml>    
+    
+</config>

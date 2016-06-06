@@ -1,0 +1,135 @@
+<style>
+	.massaction form, .massaction span {
+		float: right;
+		margin-right: 10px;
+	}
+	.massaction span {
+		font-weight: bold;
+	}
+</style>
+<?php
+$_disabledCategories = Mage::registry('disabledCategories');
+$_messages = Mage::registry('messages');
+$_feedstatus = Mage::registry('feedstatus');
+echo '<h3>';
+if($_messages['message'] != '') {
+	echo $_messages['message'];
+}
+echo '</h3>';
+?>
+<div id="wrapper">
+	<div id="anchor-content">
+		<div id="page:main-container">
+			<div class="content-header">
+				<table cellspacing="0">
+					<tbody>
+						<tr>
+							<td style="width:50%;"><h3 class="icon-head head-sales-order">Excluded Categories</h3></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="massaction">
+				<form action="<?php echo Mage::helper("adminhtml")->getUrl("magento2amazon/settings/remove"); ?>">
+					<input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+					<input type="text" name="category" class="input-text no-changes" placeholder="Enter category name">
+					<button class="scalable ">Remove from Sync</button>
+				</form>
+				<span>Enter Category You want to exclude</span>
+			</div>
+			<div class="grid">
+				<div id="hor-scroll">
+					<table class="data" cellspacing="0">
+						<colgroup>
+						<col></col>
+						<col></col>
+						<col></col>
+					</colgroup>
+					<tr class="headings">
+						<th>ID</th>
+						<th>Category</th>
+						<th>Action</th>
+					</tr>
+					<tbody>
+						<?php
+						$i = 0;
+						if(count($_disabledCategories) > 0) {
+							foreach ($_disabledCategories as $category) {
+								$cat_id = $category['entity_id'];
+								$url = Mage::helper("adminhtml")->getUrl("magento2amazon/settings/add/1/", array($cat_id));
+								$class = ($i++ % 2 == 0) ? 'even' : 'odd';
+								echo '<tr class="' . $class . '">';
+								echo '<td>' . $category['entity_id'] . '</td>';
+								echo '<td>' . $category['name'] . '</td>';
+								echo '<td><a href="' . $url . '">Remove</a></td>';
+								echo '</tr>';
+							}
+						}
+						else {
+							echo '<tr class="even">';
+							echo '<td class="empty-text a-center" colspan="9">No records found.</td>';
+							echo '</tr>';
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="content-header">
+				<table cellspacing="0">
+					<tbody>
+						<tr>
+							<td style="width:50%;"><h3 class="icon-head head-sales-order">Feed Status</h3></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		<div class="grid">
+			<div id="hor-scroll">
+				<table class="data" cellspacing="0">
+					<colgroup>
+					<col></col>
+					<col></col>
+					<col></col>
+					<col></col>
+				</colgroup>
+				<tr class="headings">
+					<th>ID</th>
+					<th>Feed Type</th>
+					<th>Submission Date</th>
+					<th>Status</th>
+				</tr>
+				<tbody>
+					<?php
+					$i = 0;
+					if(count($_feedstatus) > 0) {
+						foreach ($_feedstatus as $status) {
+							$class = ($i++ % 2 == 0) ? 'even' : 'odd';
+							echo '<tr class="' . $class . '">';
+							echo '<td>' . $status['id'] . '</td>';
+							echo '<td>' . $status['type'] . '</td>';
+							echo '<td>' . $status['data'] . '</td>';
+							echo '<td>' . $status['status'] . '</td>';
+							echo '</tr>';
+						}
+					}
+					else {
+						echo '<tr class="even">';
+						echo '<td class="empty-text a-center" colspan="9">No records found.</td>';
+						echo '</tr>';
+					}
+					?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+<div class="row">
+	<div class="runnable">
+		<a href="<?php echo Mage::helper("adminhtml")->getUrl("magento2amazon/settings/getfeedstatus/1/");?>feed">Get Feed Status</a>
+		<a href="<?php echo Mage::helper("adminhtml")->getUrl("magento2amazon/settings/sync/1/");?>feed">Sync</a>
+		<a href="<?php echo Mage::getBaseUrl( Mage_Core_Model_Store::URL_TYPE_WEB, true);?>feed">Run the feed</a>
+	</div>
+</div>

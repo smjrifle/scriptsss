@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Smjrifle_Magento2Amazon>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Smjrifle_Magento2Amazon>
+    </modules>
+</config>
