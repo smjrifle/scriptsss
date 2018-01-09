@@ -1,0 +1,54 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+alias kazissh="ssh smjrifle@kazi270.com"
+alias smjssh="ssh smjrifle@smjrifle.net -p 2222"
+alias swssh="ssh f1b9e2i9@108.167.164.210 -p 2222"
+alias saedissh="ssh saediwor@saedi-works.com -p 2222"
+alias xyzssh="ssh smjrifle@merosanokatha.com"
+alias phperr="tail /var/log/apache2/error_log"
+alias showhidden="sh /Users/smjrifle/Documents/scripts/show.sh"
+alias hidehidden="sh /Users/smjrifle/Documents/scripts/hide.sh; clear"
+alias smjrifle="sh /Users/smjrifle/App/tc.sh"
+alias fuck='echo "what the fuck, correct it else no fucks will be given";$(thefuck $(fc -ln -1))'
+alias betty="~/betty/main.rb"
+alias gitpush="sh ~/git.sh"
+alias searchreplace="sh ~/search-replace.sh"
+alias a2ssh="ssh saediwor@saediworks.com -p 7822"
+
+source /sw/bin/init.sh
+echo "Welcome Smjrifle"
+set -o vi
+
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+function mkcd () {mkdir $1;cd $1;}
+function webserver () {cd /Library/WebServer/http/$1;}
+function nodeserver () {cd /Users/smjrifle/nodeprojects/$1;}
+function androidapp () {cd /Users/smjrifle/AndroidStudioProjects/$1;}
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+function transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
+  tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }
+
+export EDITOR=/usr/bin/vim
+export VISUAL=/usr/bin/vim
+
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias ff="find / -type f -name"
+alias f.="find . -type f -name"
+export PATH=/usr/local/share/dotnet:/usr/local/bin:/usr/local/sbin:$PATH:/Users/smjrifle/bin:/Users/smjrifle/Library/Android/sdk/platform-tools/
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+ source ~/.rvm/scripts/rvm
