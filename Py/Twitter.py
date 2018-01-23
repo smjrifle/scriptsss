@@ -24,7 +24,7 @@ print("Array of tweet images fetched")
 print(tweet_imgs)
 n = 1
 for tweet_img in tweet_imgs:
-    print("Pin " + tweet_img.attrib['src'] + " processed")
+    print("Tweet " + tweet_img.attrib['src'] + " processed")
     image_address=requests.get(tweet_img.attrib['src'])
     resource=image_address.content
     output=open(FOLDER_URL + "/" + "Image" + str(n) + ".jpg", "wb")
